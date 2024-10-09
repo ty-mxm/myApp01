@@ -20,7 +20,7 @@
             <ion-input v-model="password" type="password" placeholder="Mot de passe" required></ion-input>
             <ion-icon slot="end" name="lock-closed-sharp" color="primary"></ion-icon>
           </ion-item>
-          <ion-button expand="block" @click="handleLogin">Connexion</ion-button>
+          <ion-button expand="block" @click="handleLogin">Se connecter</ion-button>
           <router-link to="/signup">
             <ion-button expand="block">S'inscrire</ion-button>
           </router-link>
