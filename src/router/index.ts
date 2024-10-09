@@ -8,7 +8,7 @@ import Geolocation from '../views/Geolocation.vue'; // Importer le composant Geo
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/login'
   },
   {
     path: '/home',
