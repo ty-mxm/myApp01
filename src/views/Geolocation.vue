@@ -10,9 +10,9 @@
         <div class="location-container">
           <p>Latitude: {{ latitude }}</p>
           <p>Longitude: {{ longitude }}</p>
-          <ion-button expand="block" @click="addLocation">AJOUTER EMPLACEMENT</ion-button>
-          <ion-button expand="block" @click="logout">DÉCONNECTER</ion-button>
-          <ion-button expand="block" @click="clearLocations">ÉFFACER TOUT</ion-button>
+          <ion-button expand="block" @click="addLocation">AJOUTER L'EMPLACEMENT</ion-button>
+          <ion-button expand="block" @click="clearLocations">TOUT EFFACER</ion-button>
+          <ion-button expand="block" @click="logout"> SE DÉCONNECTER</ion-button>
   
           <ion-list>
             <ion-item v-for="(location, index) in locations" :key="index">{{ location }}</ion-item>
@@ -86,17 +86,47 @@
   </script>
   
   <style scoped>
-  .geolocation-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  .location-container {
-    width: 100%;
-    max-width: 400px;
-  }
+.geolocation-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.location-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  margin: 80px auto 0;
+  padding: 20px;
+  border: 2px solid #f48fb1; /* Bordure rose */
+  border-radius: 10px;
+  background-color: rgba(206, 147, 216, 0.8); /* Arrière-plan violet lavande */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  margin: 10px 0;
+  text-align: center;
+}
+
+ion-button {
+  margin-top: 10px;
+  width: 100%;
+}
+
+ion-list {
+  margin-top: 10px;
+  background-color: transparent; /* Rendre la liste transparente */
+  border: none; /* Supprime les bordures */
+}
+
+ion-item {
+  background-color: transparent; /* Rendre chaque élément transparent */
+  border: none; /* Supprime les bordures */
+  text-align: center; /* Centrer le texte */
+  padding: 5px 0;
+}
   </style>
   
