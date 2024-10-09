@@ -16,6 +16,7 @@
         <p><strong>Adresse: </strong>{{ address || 'Adresse non disponible' }}</p> <!-- Affiche l'adresse -->
         
         <!-- Boutons pour ajouter l'emplacement, effacer la liste et se déconnecter -->
+        <ion-button expand="block" @click="fetchGeolocation">Recharger la position</ion-button>
         <ion-button expand="block" @click="addLocation">AJOUTER L'EMPLACEMENT</ion-button>
         <ion-button expand="block" @click="clearLocations">TOUT EFFACER</ion-button>
         <ion-button expand="block" @click="logout"> SE DÉCONNECTER</ion-button>
