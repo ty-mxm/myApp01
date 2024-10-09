@@ -120,9 +120,9 @@
     max-width: 400px;
     margin: 80px auto 0;
     padding: 20px;
-    border: 2px solid #007bff;
+    border: 2px solid #f48fb1; /* Bordure rose */
     border-radius: 10px;
-    background-color: rgba(135, 206, 250, 0.8);
+    background-color: rgba(206, 147, 216, 0.8); /* Arrière-plan violet lavande */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   }
   </style>

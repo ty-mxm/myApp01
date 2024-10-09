@@ -63,8 +63,8 @@
       logout() {
         // Code pour gérer la déconnexion
         console.log('Déconnexion effectuée');
-        // Redirection ou effacement de session
-        this.$router.push({ path: '/login' });
+        // Renvoie l'utilisateur à la page login
+        this.$router.push({ path: '/login' }); 
       },
       clearLocations() {
         this.locations = [];
