@@ -29,7 +29,7 @@
   
       <ion-footer class="footer">
         <ion-toolbar color="secondary">
-          <ion-title>Pied de page</ion-title>
+          <ion-title>Ty Mammoliti et Sofia Krins 2024 ™</ion-title>
         </ion-toolbar>
       </ion-footer>
     </ion-page>
