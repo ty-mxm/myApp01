@@ -42,7 +42,7 @@
 
 <script lang="ts">
   // Importation des composants Ion nécessaires et des fonctions utilitaires
-  import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonFooter, IonButton, IonItem, IonInput, IonIcon } from '@ionic/vue';
+  import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonFooter, IonButton, IonItem, IonInput } from '@ionic/vue';
   import { alertController } from '@ionic/vue';
   import { defineComponent } from 'vue';
 
