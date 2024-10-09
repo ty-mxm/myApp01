@@ -10,14 +10,22 @@
         <div class="location-container">
           <p>Latitude: {{ latitude }}</p>
           <p>Longitude: {{ longitude }}</p>
-          <p><strong>Adresse: </strong>{{ address || 'Adresse non disponible' }}</p> <!-- Affiche l'adresse ici -->
+          <p><strong>Adresse: </strong>{{ address || 'Adresse non disponible' }}</p> <!-- Affiche l'adresse -->
           <ion-button expand="block" @click="addLocation">AJOUTER L'EMPLACEMENT</ion-button>
           <ion-button expand="block" @click="clearLocations">TOUT EFFACER</ion-button>
           <ion-button expand="block" @click="logout"> SE DÉCONNECTER</ion-button>
   
           <ion-list>
-            <ion-item v-for="(location, index) in locations" :key="index">{{ location }}</ion-item>
-          </ion-list>
+          <ion-item v-for="(location, index) in locations" :key="index" class="styled-item">
+            <div class="location-info"> 
+              <div class="lat-lon"> 
+                <p>Lat: {{ location.latitude }}</p>
+                <p>Lon: {{ location.longitude }}</p>
+              </div>
+              <p><strong>Adresse: </strong>{{ location.address || 'Adresse non disponible' }}</p>
+            </div>
+          </ion-item>
+        </ion-list>
         </div>
       </ion-content>
   
@@ -51,18 +59,22 @@
         latitude: null as number | null,
         longitude: null as number | null,
         address: null as string | null, // Ajout de la propriété pour l'adresse
-        locations: [] as string[],
+        locations: [] as Array<{ latitude: number, longitude: number, address: string | null }>, // Stocke les emplacements avec l'adresse
       };
     },
     methods: {
       async addLocation() {
         if (this.latitude !== null && this.longitude !== null) {
-          const location = `Lat: ${this.latitude}, Lon: ${this.longitude}`;
-          this.locations.push(location);
-        } else {
-          alert('Veuillez d\'abord obtenir la géolocalisation.');
-        }
-      },
+        const location = {
+          latitude: this.latitude,
+          longitude: this.longitude,
+          address: this.address || 'Adresse non disponible',
+        };
+        this.locations.push(location);
+      } else {
+        alert('Veuillez d\'abord obtenir la géolocalisation.');
+      }
+    },  
       logout() {
         // Code pour gérer la déconnexion
         console.log('Déconnexion effectuée');
@@ -78,7 +90,7 @@
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
 
-        // Obtenez l'adresse avec les coordonnées
+        // Obtenir l'adresse avec les coordonnées
         this.address = await this.getAddressFromCoordinates(this.latitude, this.longitude);
       } catch (error) {
         console.error('Erreur de géolocalisation', error);
@@ -140,11 +152,30 @@ ion-list {
   border: none; /* Supprime les bordures */
 }
 
-ion-item {
-  background-color: transparent; /* Rendre chaque élément transparent */
+ion-item.styled-item {
+  background-color: rgba(206, 147, 216, 0.8); /* Arrière-plan violet lavande */
+  color: white; /* Texte en blanc */
   border: none; /* Supprime les bordures */
-  text-align: center; /* Centrer le texte */
-  padding: 5px 0;
+  border-radius: 10px; /* Bordure arrondie */
+  padding: 10px;
+  margin-bottom: 10px; /* Ajout d'un espace entre les éléments */
+}
+
+ion-item.styled-item::part(native) {
+  background: none; /* Supprime le fond par défaut de ion-item */
+}
+
+.lat-lon {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white; /* Texte en blanc */
 }
   </style>
   
