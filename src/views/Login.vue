@@ -17,7 +17,7 @@
             <ion-icon slot="end" name="mail" color="primary"></ion-icon>
           </ion-item>
           <ion-item>
-            <ion-input v-model="password" type="password" placeholder="mot de passe" required></ion-input>
+            <ion-input v-model="password" type="password" placeholder="Mot de passe" required></ion-input>
             <ion-icon slot="end" name="lock-closed-sharp" color="primary"></ion-icon>
           </ion-item>
           <ion-button expand="block" @click="handleLogin">Connexion</ion-button>
