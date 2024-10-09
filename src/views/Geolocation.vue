@@ -10,6 +10,7 @@
         <div class="location-container">
           <p>Latitude: {{ latitude }}</p>
           <p>Longitude: {{ longitude }}</p>
+          <p><strong>Adresse: </strong>{{ address || 'Adresse non disponible' }}</p> <!-- Affiche l'adresse ici -->
           <ion-button expand="block" @click="addLocation">AJOUTER L'EMPLACEMENT</ion-button>
           <ion-button expand="block" @click="clearLocations">TOUT EFFACER</ion-button>
           <ion-button expand="block" @click="logout"> SE DÉCONNECTER</ion-button>
@@ -31,6 +32,7 @@
   <script lang="ts">
   import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonFooter, IonButton, IonItem, IonList } from '@ionic/vue';
   import { defineComponent } from 'vue';
+  import { Geolocation } from '@capacitor/geolocation';
   
   export default defineComponent({
     components: {
@@ -48,11 +50,12 @@
       return {
         latitude: null as number | null,
         longitude: null as number | null,
+        address: null as string | null, // Ajout de la propriété pour l'adresse
         locations: [] as string[],
       };
     },
     methods: {
-      addLocation() {
+      async addLocation() {
         if (this.latitude !== null && this.longitude !== null) {
           const location = `Lat: ${this.latitude}, Lon: ${this.longitude}`;
           this.locations.push(location);
@@ -69,16 +72,31 @@
       clearLocations() {
         this.locations = [];
       },
-      fetchGeolocation() {
-        // Ici, vous pouvez intégrer le code pour récupérer la géolocalisation
-        navigator.geolocation.getCurrentPosition((position) => {
-          this.latitude = position.coords.latitude;
-          this.longitude = position.coords.longitude;
-        }, (error) => {
-          console.error('Erreur de géolocalisation', error);
-        });
-      },
+      async fetchGeolocation() {
+        try {
+        const position = await Geolocation.getCurrentPosition();
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+
+        // Obtenez l'adresse avec les coordonnées
+        this.address = await this.getAddressFromCoordinates(this.latitude, this.longitude);
+      } catch (error) {
+        console.error('Erreur de géolocalisation', error);
+      }
     },
+    async getAddressFromCoordinates(latitude: number, longitude: number) {
+      try {
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+        );
+        const data = await response.json();
+        return data.display_name;
+      } catch (error) {
+        console.error('Erreur lors de la récupération de l\'adresse :', error);
+        return 'Adresse non disponible';
+      }
+    },
+  },
     mounted() {
       this.fetchGeolocation();
     },
